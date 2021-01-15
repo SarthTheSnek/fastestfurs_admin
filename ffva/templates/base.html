@@ -18,17 +18,17 @@
                         <a href="{{ url_for('main.index') }}" class="navbar-item">
                             Home
                         </a>
-                        {% if requires_authorization %}
-                        <a href="{{ url_for('auth.profile') }}" class="navbar-item">
+                        {% if authorized %}
+                        <a href="{{ url_for('main.profile') }}" class="navbar-item">
                             Profile
                         </a>
                         {% endif %}
-                        {% if not requires_authentication %}
+                        {% if not authorized %}
                         <a href="{{ url_for('auth.login') }}" class="navbar-item">
                             Login
                         </a>
                         {% endif %}
-                        {% if requires_authentication %}
+                        {% if authorized %}
                         <a href="{{ url_for('auth.logout') }}" class="navbar-item">
                             Logout
                         </a>

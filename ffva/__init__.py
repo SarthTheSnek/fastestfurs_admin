@@ -1,6 +1,9 @@
 import os
 import secrets
 from flask import Flask
+from flask_discord import DiscordOAuth2Session
+
+discord = DiscordOAuth2Session()
 
 def create_app():
     app = Flask(__name__)
@@ -12,7 +15,7 @@ def create_app():
     app.config['DISCORD_REDIRECT_URI'] = os.getenv('DISCORD_REDIRECT_URI')
     app.config['DISCORD_BOT_TOKEN'] = os.getenv('DISCORD_BOT_TOKEN')
 
-    from .auth import auth as auth_blueprint, discord
+    from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix='/auth')
     discord.init_app(app)
 

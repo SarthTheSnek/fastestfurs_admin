@@ -1,18 +1,17 @@
-from flask import Blueprint, redirect, url_for, render_template
-from flask_discord import DiscordOAuth2Session, requires_authorization, Unauthorized
+from flask import Blueprint, redirect, url_for, render_template, current_app as app
+from flask_discord import requires_authorization, Unauthorized
 
 auth = Blueprint('auth', __name__)
-discord = DiscordOAuth2Session()
 
 
 @auth.route('/login')
 def login():
-    return discord.create_session()
+    return app.discord.create_session(scope='identify guilds')
 
 
 @auth.route('/callback')
 def callback():
-    discord.callback()
+    app.discord.callback()
     return redirect(url_for('auth.profile'))
 
 
@@ -23,11 +22,5 @@ def redirect_unauthorized(e):
 
 @auth.route('/logout')
 def logout():
-    return 'Logout'
-
-
-@auth.route('/profile')
-@requires_authorization
-def profile():
-    user = discord.fetch_user()
-    return render_template('profile.html', name=user.name)
+    app.discord.revoke()
+    return redirect(url_for('main.index'))
