@@ -2,6 +2,7 @@
 
 {% block content %}
 <h1 class="title">
-    Welcome, {{ name }}!
+    <img src={{ user.avatar_url }} /><br />
+    Welcome, {{ user.name }}!
 </h1>
 {% endblock %}

@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-    Flask Login Example
-</h1>
-<h2 class="subtitle">
-    Easy authentication and authorization in Flask.
-</h2>
+  {% if not authorized %}
+    <h1 class="title">
+        Welcome to Fastest Furs
+    </h1>
+    <h2 class="subtitle">
+        If you have trouble logging in, please contact someone on the Leadership Team.
+    </h2>
+  {% else %}
+    <h1 class="title">
+        <img src={{ user.avatar_url }} /><br />
+        Welcome, {{ user.name }}!
+    </h1>
+  {% endif %}
 {% endblock %}

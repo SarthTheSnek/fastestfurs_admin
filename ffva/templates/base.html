@@ -15,22 +15,26 @@
             <nav class="container">
                 <div id="navbarMenuHeroA" class="navbar-menu">
                     <div class="navbar-end">
-                        <a href="{{ url_for('main.index') }}" class="navbar-item">
-                            Home
-                        </a>
                         {% if authorized %}
-                        <a href="{{ url_for('main.profile') }}" class="navbar-item">
-                            Profile
-                        </a>
-                        {% endif %}
-                        {% if not authorized %}
+                          {% if perm_level % 2 == 0 %}
+                            <a href="#" class="navbar-item">
+                                Streams
+                            </a>
+                            {% if perm_level == 4 %}
+                              <a href="#" class="navbar-item">
+                                  Admin
+                              </a>
+                            {% endif %}
+                          {% endif %}
+                          <a href="{{ url_for('auth.logout') }}" class="navbar-item">
+                              Logout
+                          </a>
+                          <a href="#" class="navbar-item">
+                              <img src={{ user.avatar_url }} />
+                          </a>
+                        {% else %}
                         <a href="{{ url_for('auth.login') }}" class="navbar-item">
-                            Login
-                        </a>
-                        {% endif %}
-                        {% if authorized %}
-                        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-                            Logout
+                          Login with Discord <img src="https://cdn1.iconfinder.com/data/icons/computer-techologies-outline-free/128/ic_discord_logo-512.png" />
                         </a>
                         {% endif %}
                     </div>
