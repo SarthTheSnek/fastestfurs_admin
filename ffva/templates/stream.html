@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
+
+  <video
+    id="stream"
+    class="video-js"
+    controls
+    preload="auto"
+    width="640"
+    height="264"
+    poster="MY_VIDEO_POSTER.jpg"
+    data-setup="{}"
+  >
+
+  <source src="rtmp://
+{% endblock %}

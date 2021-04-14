@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FFVA</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma-social@2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -21,7 +24,7 @@
                                 Streams
                             </a>
                             {% if perm_level == 4 %}
-                              <a href="#" class="navbar-item">
+                              <a href="{{ url_for('admin.index') }}" class="navbar-item">
                                   Admin
                               </a>
                             {% endif %}
@@ -33,9 +36,14 @@
                               <img src={{ user.avatar_url }} />
                           </a>
                         {% else %}
-                        <a href="{{ url_for('auth.login') }}" class="navbar-item">
-                          Login with Discord <img src="https://cdn1.iconfinder.com/data/icons/computer-techologies-outline-free/128/ic_discord_logo-512.png" />
-                        </a>
+                        <span class="navbar-item">
+                          <a href="{{ url_for('auth.login') }}" class="button is-discord">
+                            <span class="icon">
+                              <i class="fab fa-discord"></i>
+                            </span>
+                            <span>Login</span>
+                          </a>
+                        </span>
                         {% endif %}
                     </div>
                 </div>

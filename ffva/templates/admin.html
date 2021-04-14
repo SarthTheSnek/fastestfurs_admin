@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if authorized %}
+<h1 class="title">
+    <img src="https://i.imgur.com/RjFjUHs.gif" /><br />
+    Under Construction!
+</h1>
+<section class="hero is-warning">
+    <p class="title">
+      Administrative Actions
+    </p>
+    <p class="subtitle">
+      These actions can have dire consequences if abused. Please only use if you have been told by a producer!
+    </p>
+</section>
+<section>
+  <p class="pt-2">
+  <a class="button is-danger modal-button" data-target="#modal" >
+    <span class="icon">
+      <i class="fas fa-server"></i>
+    </span>
+    <span>Restart Nginx</span>
+  </a>
+  </p>
+  <div class="modal" id="modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <div class="box">
+        <article class="media">
+          <div class="media-content">
+            <div class="content">
+              <section class="hero is-danger">
+                <p class="title">
+                  Restart Nginx?
+                </p>
+                <p class="subtitle">
+                  Are you sure you want to restart the streaming server?
+                </p>
+              </section>
+              <p class="pt-4">
+                <a class="button is-primary modal-close">No</a>
+                <a class="button is-danger">Yes</a>
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div>
+</section>
+<script>
+  $(".modal-button").click(function() {
+    var target = $(this).data("target");
+    $("html").addClass("is-clipped");
+    $(target).addClass("is-active");
+  });
+
+  $(".modal-close").click(function() {
+    $("html").removeClass("is-clipped");
+    $(this).parent().removeClass("is-active");
+  });
+</script>
+{% endif %}
+{% endblock %}

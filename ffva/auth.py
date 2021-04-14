@@ -1,3 +1,4 @@
+import functools
 import os
 import requests
 from flask import Blueprint, redirect, url_for, session, current_app as app
@@ -38,6 +39,17 @@ def check_permissions():
     else:
         session['PERM'] = 1
     return session
+
+
+def must_be_leadership(view):
+    @functools.wraps(view)
+    def wrapper(*args, **kwargs):
+        print(session.get('PERM'))
+        if not session.get('PERM') or session['PERM'] != 4:
+            raise Unauthorized
+        return view(*args, **kwargs)
+
+    return wrapper
 
 
 def call_server(user) -> int:
